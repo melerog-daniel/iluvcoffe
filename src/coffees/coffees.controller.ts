@@ -13,6 +13,7 @@ export class CoffeesController {
   }
 
   @Post()
+  //   @HttpCode(HttpStatus.GONE)
   create(@Body() body) {
     return body;
   }
