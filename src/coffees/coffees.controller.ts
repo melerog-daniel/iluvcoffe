@@ -3,6 +3,9 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -23,7 +26,14 @@ export class CoffeesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.coffeesService.findOne(id);
+    // With the undefined error bellow, we can see this error string in console, and Internal Server Error in PostMan
+    // throw 'A random error';
+    const coffee = this.coffeesService.findOne(id);
+    if (!coffee) {
+      // throw new HttpException(`Coffee #${id} not found`, HttpStatus.NOT_FOUND);
+      throw new NotFoundException(`Coffee #${id} not found`);
+    }
+    return coffee;
   }
 
   @Post()
