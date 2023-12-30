@@ -27,10 +27,11 @@ export class CoffeesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     // With the undefined error bellow, we can see this error string in console, and Internal Server Error in PostMan
     // throw 'A random error';
-    const coffee = this.coffeesService.findOne(id);
+    console.log(typeof id);
+    const coffee = this.coffeesService.findOne('' + id);
     if (!coffee) {
       // throw new HttpException(`Coffee #${id} not found`, HttpStatus.NOT_FOUND);
       throw new NotFoundException(`Coffee #${id} not found`);
@@ -41,6 +42,7 @@ export class CoffeesController {
   @Post()
   //   @HttpCode(HttpStatus.GONE)
   create(@Body() createCoffeeDto: CreateCoffeeDto) {
+    console.log(createCoffeeDto instanceof CreateCoffeeDto);
     return this.coffeesService.create(createCoffeeDto);
   }
 
