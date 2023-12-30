@@ -28,7 +28,7 @@
 
 NestJS Fundamentals Official Course
 
-Next video -> 11
+Next video -> 20
 
 ## Installation
 
